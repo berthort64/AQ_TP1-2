@@ -1,20 +1,20 @@
 public class Commande {
 
-private String nomClient;
+private Client client;
 private int quantite;
-private String produit;
+private Plat produit;
 
-	public Commande(String nomClient,int quantite,String produit){
+	public Commande(Client nomClient,Plat produit,int quantite){
 	
-		this.nomClient=nomClient;
+		this.client=nomClient;
 		this.quantite=quantite;
 		this.produit=produit;
 		
 	}
 
-	public String getNomClient(){
+	public Client getClient(){
 		
-		return this.nomClient;
+		return this.client;
 		
 	}
 	
@@ -24,7 +24,7 @@ private String produit;
 		
 	}
 	
-	public String getProduit(){
+	public Plat getProduit(){
 		
 		return this.produit;
 		
