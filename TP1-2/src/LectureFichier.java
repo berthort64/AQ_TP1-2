@@ -42,6 +42,8 @@ public class LectureFichier {
 					Client client = new Client(contenu[0]);
 					clients.add(client);
 					
+					System.out.println(client.getNom());
+					
 					break;
 				case 2:
 					
@@ -67,7 +69,7 @@ public class LectureFichier {
 					
 					if (clientCommande == null) {
 						
-						System.out.println('"' + ligne + "\" : Le client n'existe pas\nLa commande n'a pas été ajoutée.\n");
+						System.out.println('"' + ligne + "\" : Le client \"" + nomClient + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
 						break;
 						
 					}
@@ -81,7 +83,7 @@ public class LectureFichier {
 					
 					if (platCommande == null) {
 						
-						System.out.println('"' + ligne + "\" : Le plat n'existe pas\nLa commande n'a pas été ajoutée.\n");
+						System.out.println('"' + ligne + "\" : Le plat \"" + nomProduit + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
 						break;
 						
 					}
@@ -104,15 +106,15 @@ public class LectureFichier {
 		//Ecriture dans le fichier des factures
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fichierE));
 
-		bw.write("Bienvenue chez Barrette!");
-		bw.write("Factures :");
+		bw.write("Bienvenue chez Barrette!\n");
+		bw.write("Factures :\n");
 		
 		for (Commande commande : commandes) {
 			
 			double prix = commande.getQuantite() * commande.getProduit().getPrix();
 			String nomClient = commande.getClient().getNom();
 			
-			bw.write(nomClient + " " + prix + "$");
+			bw.write(nomClient + " " + prix + "$\n");
 			
 		}
 		
