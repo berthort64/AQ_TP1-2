@@ -21,7 +21,6 @@ public class LectureFichier {
 		
 		reader.close();
 		
-		
 		System.out.println();
 		
 		//Lecture dans le fichier des commandes
@@ -42,8 +41,6 @@ public class LectureFichier {
 					Client client = new Client(contenu[0]);
 					clients.add(client);
 					
-					System.out.println(client.getNom());
-					
 					break;
 				case 2:
 					
@@ -61,7 +58,7 @@ public class LectureFichier {
 					Plat platCommande = null;
 					
 					for (Client c : clients) {
-						if (c.getNom() == nomClient) {
+						if (c.getNom().equals(nomClient)) {
 							clientCommande = c;
 							break;
 						}
@@ -75,7 +72,7 @@ public class LectureFichier {
 					}
 					
 					for (Plat p : plats) {
-						if (p.getProduit() == nomProduit) {
+						if (p.getProduit().equals(nomProduit)) {
 							platCommande = p;
 							break;
 						}
@@ -91,6 +88,8 @@ public class LectureFichier {
 					Commande commande = new Commande(clientCommande, platCommande, qte);
 					commandes.add(commande);
 					
+					clientCommande.ajouterCommande(qte * platCommande.getPrix());
+					
 					break;
 				default:
 					System.out.println("Le fichier ne respecte pas le format demandé");
@@ -102,19 +101,18 @@ public class LectureFichier {
 		
 		br.close();
 		
-		
 		//Ecriture dans le fichier des factures
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fichierE));
 
 		bw.write("Bienvenue chez Barrette!\n");
 		bw.write("Factures :\n");
 		
-		for (Commande commande : commandes) {
+		for (Client client : clients) {
 			
-			double prix = commande.getQuantite() * commande.getProduit().getPrix();
-			String nomClient = commande.getClient().getNom();
+			double facture = client.getFacture();
+			String nomClient = client.getNom();
 			
-			bw.write(nomClient + " " + prix + "$\n");
+			bw.write(nomClient + " " + facture + "$\n");
 			
 		}
 		
