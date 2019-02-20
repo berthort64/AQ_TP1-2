@@ -1,0 +1,6 @@
+1. Dans le nom d'une variable, les mots suivant le premier doivent commencer par une majuscule.
+2. Les constantes sont en majuscules.
+3. Les noms de variable ne peuvent être faits qu'avec les 26 lettres minuscules (a-z), les 26 lettres majuscules (A-Z) et les 10 chiffres (0-9). Les constantes peuvent utiliser le souligné (_) pour séparer les mots. Les noms doivent obligatoirement commencer par une lettre minuscule.
+4. Le nom des variables doit être significatif, sans être trop long (pas plus de trois mots).
+5. Dans un constructeur, les paramètres ont le même nom que les variables qu'ils assignent.
+6. Toutes les propriétés des classes doivent avoir des accesseurs nommés "getNomVariable" où "NomVariable" est remplacé par le nom de la variable (formatté tel que décrit au point 1).
