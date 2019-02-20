@@ -23,6 +23,8 @@ public class LectureFichier {
 		
 		System.out.println();
 		
+		
+		
 		//Lecture dans le fichier des commandes
 		BufferedReader br = new BufferedReader(new FileReader(fichierL));
 		
@@ -101,6 +103,8 @@ public class LectureFichier {
 		
 		br.close();
 		
+		
+		
 		//Ecriture dans le fichier des factures
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fichierE));
 
@@ -117,6 +121,8 @@ public class LectureFichier {
 		}
 		
 		bw.close();
+		
+		
 		
 		System.out.println("\nFin du programme.");
 	}

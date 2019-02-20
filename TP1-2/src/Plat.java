@@ -1,27 +1,25 @@
 public class Plat {
 
-private String produit;
-private double prix;
+	private String produit;
+	private double prix;
 
-	public Plat(String produit,double prix){
-	
-	this.produit=produit;
-	this.prix=prix;
-	
+	public Plat(String produit, double prix) {
+
+		this.produit = produit;
+		this.prix = prix;
+
 	}
 
+	public String getProduit() {
 
-	public String getProduit(){
+		return this.produit;
 
-	return this.produit;
-	
-	}
-	
-	public double getPrix(){
-		
-	return this.prix;
-	
 	}
 
+	public double getPrix() {
+
+		return this.prix;
+
+	}
 
 }

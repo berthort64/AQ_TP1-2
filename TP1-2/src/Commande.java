@@ -1,33 +1,33 @@
 public class Commande {
 
-private Client client;
-private int quantite;
-private Plat produit;
+	private Client client;
+	private int quantite;
+	private Plat produit;
 
-	public Commande(Client nomClient,Plat produit,int quantite){
-	
-		this.client=nomClient;
-		this.quantite=quantite;
-		this.produit=produit;
-		
+	public Commande(Client client, Plat produit, int quantite) {
+
+		this.client = client;
+		this.quantite = quantite;
+		this.produit = produit;
+
 	}
 
-	public Client getClient(){
-		
+	public Client getClient() {
+
 		return this.client;
-		
+
 	}
-	
-	public int getQuantite(){
-		
+
+	public int getQuantite() {
+
 		return this.quantite;
-		
+
 	}
-	
-	public Plat getProduit(){
-		
+
+	public Plat getProduit() {
+
 		return this.produit;
-		
+
 	}
 
 }
