@@ -19,17 +19,14 @@ public class LectureFichier {
 		
 		System.out.print("Entrez le chemin du fichier de LECTURE : ");
 		String fichierL = reader.nextLine();
-
-		System.out.print("Entrez le chemin du fichier d'ÉCRITURE : ");
-		String fichierE = reader.nextLine();
 		
 		reader.close();
 		
-		executer(fichierL, fichierE);
+		executer(fichierL);
 		
 	}
 	
-	public static void executer(String fichierL, String fichierE) throws IOException {
+	public static void executer(String fichierL) throws IOException {
 		
 		//Lecture dans le fichier des commandes
 		BufferedReader br = new BufferedReader(new FileReader(fichierL));
@@ -151,7 +148,7 @@ public class LectureFichier {
 		}
 		
 		//Ecriture dans le fichier des factures
-		BufferedWriter bw = new BufferedWriter(new FileWriter(fichierE));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Facture-du-" /*TODO*/ ));
 
 		bw.write("Bienvenue chez Barrette!\n");
 		bw.write("Factures :\n");
