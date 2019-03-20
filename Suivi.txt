@@ -1,0 +1,13 @@
+Gabriel:
+--------------------
+1-If nomClient==null or plat==null
+2-Format (nom avec caracteres hors normes ou plat ou qt) et l'ordre dans laquel le fichier peut etre mit n<est pas respecter (try catch?)
+3-Prix ridiculement haut ou 0 ou quantite de plats=0
+
+Joel:
+--------------------
+4-facture doit etre dans le system.out.print() et ecrite dans le fichier Facture-du-(dateTime).txt
+5-Afficher aussi les commandes eronnees avec la raison avant les factures dans le system.out.print et dans le fichier
+6-Cas if pour une facture avec prix==0$------> n'est pas prise en compte et affiche nulle part
+7-Appliquer les taxes dans une methode calcul pour le prix final avant impression de la facture. 
+
