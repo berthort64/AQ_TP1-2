@@ -10,6 +10,8 @@ public class LectureFichier {
 	
 	private static int etat = 0;
 	
+	private static ArrayList<String> erreurs = new ArrayList<String>();
+	
 	public static void main (String[] args) throws IOException {
 		
 		//Nom des fichiers
@@ -23,9 +25,11 @@ public class LectureFichier {
 		
 		reader.close();
 		
-		System.out.println();
+		executer(fichierL, fichierE);
 		
-		
+	}
+	
+	public static void executer(String fichierL, String fichierE) throws IOException {
 		
 		//Lecture dans le fichier des commandes
 		BufferedReader br = new BufferedReader(new FileReader(fichierL));
@@ -47,7 +51,7 @@ public class LectureFichier {
 				etat = 3;
 				break;
 				
-			case "Fin :":
+			case "Fin":
 				etat = -1;
 				break;
 				
@@ -62,17 +66,23 @@ public class LectureFichier {
 						Client client = new Client(contenu[0]);
 						clients.add(client);
 					} else {
-						System.out.println('"' + ligne + "\" : Le client ne respecte pas le format demandé\nLe client n'a pas été ajouté.\n");
+						print('"' + ligne + "\" : Le client ne respecte pas le format demandé\nLe client n'a pas été ajouté.\n");
 					}
 					break;
 					
 				case 2:
 					
 					if (contenu.length == 2) {
-						Plat plat = new Plat(contenu[0], Double.parseDouble(contenu[1]));
-						plats.add(plat);
+						
+						try {
+							Plat plat = new Plat(contenu[0], Double.parseDouble(contenu[1]));
+							plats.add(plat);
+						} catch(Exception e) {
+							print('"' + ligne + "\" : Le prix ne respecte pas le format demandé\nLe plat n'a pas été ajouté.\n");
+						}
+						
 					} else {
-						System.out.println('"' + ligne + "\" : Le plat ne respecte pas le format demandé\nLe plat n'a pas été ajouté.\n");
+						print('"' + ligne + "\" : Le plat ne respecte pas le format demandé\nLe plat n'a pas été ajouté.\n");
 					}
 					break;
 					
@@ -95,7 +105,7 @@ public class LectureFichier {
 						
 						if (clientCommande == null) {
 							
-							System.out.println('"' + ligne + "\" : Le client \"" + nomClient + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
+							print('"' + ligne + "\" : Le client \"" + nomClient + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
 							break;
 							
 						}
@@ -109,7 +119,7 @@ public class LectureFichier {
 						
 						if (platCommande == null) {
 							
-							System.out.println('"' + ligne + "\" : Le plat \"" + nomProduit + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
+							print('"' + ligne + "\" : Le plat \"" + nomProduit + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
 							break;
 							
 						}
@@ -119,16 +129,16 @@ public class LectureFichier {
 						
 						clientCommande.ajouterCommande(qte * platCommande.getPrix());
 					} else {
-						System.out.println('"' + ligne + "\" : La commande ne respecte pas le format demandé\nLa commande n'a pas été ajoutée.\n");
+						print('"' + ligne + "\" : La commande ne respecte pas le format demandé\nLa commande n'a pas été ajoutée.\n");
 					}
 					break;
 					
 				// Cas d'erreur
 				case 0:
-					System.out.println('"' + ligne + "\" : Le fichier ne respecte pas le format demandé : Doit commencer par la section 'Clients'.\nLa ligne a été ignorée.\n");
+					print('"' + ligne + "\" : Le fichier ne respecte pas le format demandé : Doit commencer par la section 'Clients'.\nLa ligne a été ignorée.\n");
 					break;
 				case -1:
-					System.out.println('"' + ligne + "\" : Le fichier ne respecte pas le format demandé : Aucune ligne ne doit suivre la ligne 'Fin'.\nLa ligne a été ignorée.\n");
+					print('"' + ligne + "\" : Le fichier ne respecte pas le format demandé : Aucune ligne ne doit suivre la ligne 'Fin'.\nLa ligne a été ignorée.\n");
 					break;
 				}
 			}
@@ -136,7 +146,9 @@ public class LectureFichier {
 		
 		br.close();
 		
-		
+		if (etat != -1) {
+			print("Le fichier ne se termine pas par la ligne \"Fin\".");
+		}
 		
 		//Ecriture dans le fichier des factures
 		BufferedWriter bw = new BufferedWriter(new FileWriter(fichierE));
@@ -153,11 +165,21 @@ public class LectureFichier {
 			
 		}
 		
+		if (erreurs.size() > 0) {
+			bw.write("\n\nERREURS :\n");
+			for (String erreur : erreurs) {
+				bw.write(erreur + "\n");
+			}
+		}
+		
 		bw.close();
 		
-		
-		
 		System.out.println("\nFin du programme.");
+	}
+	
+	private static void print(String text) {
+		System.out.println(text);
+		erreurs.add(text);
 	}
 	
 }
