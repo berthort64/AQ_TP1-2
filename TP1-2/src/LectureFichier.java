@@ -149,8 +149,16 @@ public class LectureFichier {
 		
 		//Ecriture dans le fichier des factures
 		BufferedWriter bw = new BufferedWriter(new FileWriter("Facture-du-" /*TODO*/ ));
-
-		bw.write("Bienvenue chez Barrette!\n");
+		
+		//Impression des erreurs
+		if (erreurs.size() > 0) {
+			bw.write("\n\nERREURS :\n");
+			for (String erreur : erreurs) {
+				bw.write(erreur + "\n");
+			}
+		}
+		
+		bw.write("\n\nBienvenue chez Barrette!\n");
 		bw.write("Factures :\n");
 		
 		for (Client client : clients) {
@@ -162,12 +170,6 @@ public class LectureFichier {
 			
 		}
 		
-		if (erreurs.size() > 0) {
-			bw.write("\n\nERREURS :\n");
-			for (String erreur : erreurs) {
-				bw.write(erreur + "\n");
-			}
-		}
 		
 		bw.close();
 		
