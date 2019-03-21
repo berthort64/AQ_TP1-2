@@ -1,5 +1,9 @@
 import java.io.*;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class LectureFichier {
@@ -9,7 +13,7 @@ public class LectureFichier {
 	private static ArrayList<Plat> plats 			= new ArrayList<Plat>();
 	
 	private static int etat = 0;
-	
+	private static String MessageErreur="Erreur dans la lecture du fichier\nFin du programme.";
 	private static ArrayList<String> erreurs = new ArrayList<String>();
 	
 	public static void main (String[] args) throws IOException {
@@ -20,20 +24,34 @@ public class LectureFichier {
 		System.out.print("Entrez le chemin du fichier de LECTURE : ");
 		String fichierL = reader.nextLine();
 		
+		
+		
 		reader.close();
 		
-		executer(fichierL);
+		boolean Validation=ValiderFichier(fichierL);
+		
+		if(Validation){
+			
+			executer(fichierL);
+			
+		}else{
+			
+			System.out.println(MessageErreur);
+			
+		}
+		
 		
 	}
 	
 	public static void executer(String fichierL) throws IOException {
 		
 		//Lecture dans le fichier des commandes
+		
 		BufferedReader br = new BufferedReader(new FileReader(fichierL));
 		
 		String ligne;
 		
-		while ((ligne = br.readLine()) != null) {
+		while ((ligne = br.readLine()) != null) {			
 			
 			switch(ligne) {
 			case "Clients :":
@@ -147,8 +165,11 @@ public class LectureFichier {
 			print("Le fichier ne se termine pas par la ligne \"Fin\".");
 		}
 		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+	    Date date = new Date();
+		
 		//Ecriture dans le fichier des factures
-		BufferedWriter bw = new BufferedWriter(new FileWriter("Facture-du-" /*TODO*/ ));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Facture-du-"+dateFormat.format(date)+".txt"));
 		
 		//Impression des erreurs
 		if (erreurs.size() > 0) {
@@ -163,13 +184,16 @@ public class LectureFichier {
 		
 		for (Client client : clients) {
 			
-			double facture = client.getFacture();
+			double facture = CalculTaxe(client.getFacture());
 			String nomClient = client.getNom();
 			
-			bw.write(nomClient + " " + facture + "$\n");
+			if(facture!=0){
+				
+				bw.write(nomClient + " " + facture + "$\n");
+				
+			}
 			
 		}
-		
 		
 		bw.close();
 		
@@ -179,6 +203,40 @@ public class LectureFichier {
 	private static void print(String text) {
 		System.out.println(text);
 		erreurs.add(text);
+	}
+	
+	private static boolean ValiderFichier(String nomFichier){
+		
+		boolean test=false;
+		
+		if(!nomFichier.contains("*")||!nomFichier.contains("\\")||!nomFichier.contains("/")||!nomFichier.contains(":")
+				||!nomFichier.contains("*")||!nomFichier.contains("?")||!nomFichier.contains("\"")||!nomFichier.contains("<")||!nomFichier.contains(">")){
+			
+			String extension=nomFichier.substring(nomFichier.length()-4,nomFichier.length());
+			
+			if(extension.equalsIgnoreCase(".txt")){
+				
+				test=true;
+				
+			}
+			
+		}
+		
+		return test;
+	}
+	
+	private static double CalculTaxe(double prix){
+		
+		double tps=prix*(0.05);
+		double tvq=prix*(0.1);
+		prix+=(tps+tvq);
+		
+		//Arrondi vers le bas et laisse seulement 2 decimal
+		DecimalFormat format=new DecimalFormat("##.##");
+		prix=Double.parseDouble(format.format(prix));
+		
+		
+		return prix;
 	}
 	
 }
