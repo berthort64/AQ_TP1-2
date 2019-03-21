@@ -93,6 +93,7 @@ public class LectureFichier {
 							Plat plat = new Plat(contenu[0], Double.parseDouble(contenu[1]));
 							plats.add(plat);
 						} catch(Exception e) {
+							
 							print('"' + ligne + "\" : Le prix ne respecte pas le format demandé\nLe plat n'a pas été ajouté.\n");
 						}
 						
@@ -179,6 +180,7 @@ public class LectureFichier {
 			}
 		}
 		
+		System.out.println("\n\nBienvenue chez Barrette!\nFactures :\n");
 		bw.write("\n\nBienvenue chez Barrette!\n");
 		bw.write("Factures :\n");
 		
@@ -188,7 +190,7 @@ public class LectureFichier {
 			String nomClient = client.getNom();
 			
 			if(facture!=0){
-				
+				System.out.print(nomClient + " " + facture + "$\n");
 				bw.write(nomClient + " " + facture + "$\n");
 				
 			}
