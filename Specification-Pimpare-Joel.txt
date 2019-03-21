@@ -1,0 +1,10 @@
+1-Créer une methode capable d'imprimer tout les détails dont nous avons besoin pour imprimer la facture,
+puis ajouter une variable dateHeure qui nous permettra de changer le format du fichier txt pour(Facture-du-date-heure.txt). 
+---------------------------------------------------------------------------------------------------------------------------
+2-Créer plusieurs variables de classe de type boolean qui seront initialisés dans les cas d'erreurs de lectureFichier.java,
+Créer une méthode qui permet d'afficher un texte d'erreur dépendament de la variable booléenne(true)
+---------------------------------------------------------------------------------------------------------------------------
+3-Faire un if simple pour gérer le prix final si il est de 0
+---------------------------------------------------------------------------------------------------------------------------
+4-Créer une méthode qui permet de calculer les taxes et les appliquer au prix
+---------------------------------------------------------------------------------------------------------------------------
