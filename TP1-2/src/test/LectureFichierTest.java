@@ -49,7 +49,7 @@ public class LectureFichierTest {
 	
 	@Test
 	public void testNomFichierNomCorrect() {
-		assertTrue(LectureFichier.ValiderFichier("nom correct, bien qu'améliorable.txt"));
+		assertTrue(LectureFichier.ValiderFichier("nom correct, bien qu'amï¿½liorable.txt"));
 	}
 	
 	@Test
@@ -62,11 +62,11 @@ public class LectureFichierTest {
 		assertFalse(LectureFichier.ValiderFichier("mauvaiseExtension.md"));
 	}
 	
-	//Test de la méthode principale
+	//Test de la mï¿½thode principale
 	@Test
 	public void testFichierCorrect() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
 				+ "\nJean"
@@ -79,21 +79,21 @@ public class LectureFichierTest {
 		
 		String attendu = "ERREURS :\n\n\n\nBienvenue chez Barrette!\nFactures :\n\nJean 8.62$\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierSansFin() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
 				+ "\nJean"
@@ -106,21 +106,21 @@ public class LectureFichierTest {
 		
 		String attendu = "ERREURS :\n\nLe fichier ne se termine pas par la ligne \"Fin\".\n\n\nBienvenue chez Barrette!\nFactures :\n\nJean 8.62$\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierMauvaisClient() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
 				+ "\nJeannnnnnnnnnn"
@@ -131,23 +131,23 @@ public class LectureFichierTest {
 				+ "\nFin");
 		bw.close();
 		
-		String attendu = "ERREURS :\n\n\"Jean Frites 3\" : Le client \"Jean\" n'existe pas\nLa commande n'a pas été ajoutée.\n\nBienvenue chez Barrette!\nFactures :\n\n";
+		String attendu = "ERREURS :\n\n\"Jean Frites 3\" : Le client \"Jean\" n'existe pas\nLa commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierMauvaisPlat() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
 				+ "\nJean"
@@ -158,23 +158,23 @@ public class LectureFichierTest {
 				+ "\nFin");
 		bw.close();
 		
-		String attendu = "ERREURS :\"Jean Frites 3\" : Le plat \"Frites\" n'existe pas\nLa commande n'a pas été ajoutée.\n\nBienvenue chez Barrette!\nFactures :\n\n";
+		String attendu = "ERREURS :\"Jean Frites 3\" : Le plat \"Frites\" n'existe pas\nLa commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierMauvaisPrix() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
 				+ "\nJean"
@@ -185,23 +185,23 @@ public class LectureFichierTest {
 				+ "\nFin");
 		bw.close();
 		
-		String attendu = "ERREURS :\"Frites cecinestpasunprix\" : Le prix ne respecte pas le format demandéLe plat n'a pas été ajouté.\"Jean Frites 3\" : Le plat \"Frites\" n'existe pas\nLa commande n'a pas été ajoutée.\n\nBienvenue chez Barrette!\nFactures :\n\n";
+		String attendu = "ERREURS :\"Frites cecinestpasunprix\" : Le prix ne respecte pas le format demandï¿½Le plat n'a pas ï¿½tï¿½ ajoutï¿½.\"Jean Frites 3\" : Le plat \"Frites\" n'existe pas\nLa commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierMauvaiseQte() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
 				+ "\nJean"
@@ -212,23 +212,23 @@ public class LectureFichierTest {
 				+ "\nFin");
 		bw.close();
 		
-		String attendu = "ERREURS :\"Jean Frites cecinestpasunchiffre\" : La quantité n'est pas un entier valide.La commande n'a pas été ajoutée.\n\nBienvenue chez Barrette!\nFactures :\n\n";
+		String attendu = "ERREURS :\"Jean Frites cecinestpasunchiffre\" : La quantitï¿½ n'est pas un entier valide.La commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierQteDecimale() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
 				+ "\nJean"
@@ -239,23 +239,23 @@ public class LectureFichierTest {
 				+ "\nFin");
 		bw.close();
 		
-		String attendu = "ERREURS :\"Jean Frites 2.5\" : La quantité n'est pas un entier valide.La commande n'a pas été ajoutée.\n\nBienvenue chez Barrette!\nFactures :\n\n";
+		String attendu = "ERREURS :\"Jean Frites 2.5\" : La quantitï¿½ n'est pas un entier valide.La commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierClientPlatInverse() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Plats :"
 				+ "\nFrites 2.50"
@@ -268,21 +268,21 @@ public class LectureFichierTest {
 		
 		String attendu = "ERREURS :\n\n\n\nBienvenue chez Barrette!\nFactures :\n\nJean 8.62$\n";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierCommandeAuDebut() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Commandes :"
 				+ "\nJean Frites 3"
@@ -293,66 +293,94 @@ public class LectureFichierTest {
 				+ "\nFin");
 		bw.close();
 		
-		String attendu = "ERREURS :\"Jean Frites 3\" : Le client \"Jean\" n'existe pasLa commande n'a pas été ajoutée.Bienvenue chez Barrette!Factures :";
+		String attendu = "ERREURS :\"Jean Frites 3\" : Le client \"Jean\" n'existe pasLa commande n'a pas ï¿½tï¿½ ajoutï¿½e.Bienvenue chez Barrette!Factures :";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierLignesMauvaisFormat() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Clients :"
-				+ "\nJean Édouard"
+				+ "\nJean ï¿½douard"
 				+ "\nPlats :"
-				+ "\nFrites salées, 2.50$"
+				+ "\nFrites salï¿½es, 2.50$"
 				+ "\nCommandes :"
-				+ "\nJean a commandé trois frites salées."
+				+ "\nJean a commandï¿½ trois frites salï¿½es."
 				+ "\nFin");
 		bw.close();
 		
-		String attendu = "ERREURS :\"Jean Édouard\" : Le client ne respecte pas le format demandéLe client n'a pas été ajouté.\"Frites salées, 2.50$\" : Le plat ne respecte pas le format demandéLe plat n'a pas été ajouté.\"Jean a commandé trois frites salées.\" : La commande ne respecte pas le format demandéLa commande n'a pas été ajoutée.Bienvenue chez Barrette!Factures :";
+		String attendu = "ERREURS :\"Jean ï¿½douard\" : Le client ne respecte pas le format demandï¿½Le client n'a pas ï¿½tï¿½ ajoutï¿½.\"Frites salï¿½es, 2.50$\" : Le plat ne respecte pas le format demandï¿½Le plat n'a pas ï¿½tï¿½ ajoutï¿½.\"Jean a commandï¿½ trois frites salï¿½es.\" : La commande ne respecte pas le format demandï¿½La commande n'a pas ï¿½tï¿½ ajoutï¿½e.Bienvenue chez Barrette!Factures :";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 	
 	@Test
 	public void testFichierSansEntetes() throws IOException {
 		
-		//Écrire un fichier d'entrée
+		//ï¿½crire un fichier d'entrï¿½e
 		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
 		bw.write("Jean"
 				+ "\nFrites 2.50"
 				+ "\nJean Frites 3");
 		bw.close();
 		
-		String attendu = "ERREURS :\"Jean\" : Le fichier ne respecte pas le format demandé : Doit commencer par la section 'Clients'.La ligne a été ignorée.\"Frites 2.50\" : Le fichier ne respecte pas le format demandé : Doit commencer par la section 'Clients'.La ligne a été ignorée.\"Jean Frites 3\" : Le fichier ne respecte pas le format demandé : Doit commencer par la section 'Clients'.La ligne a été ignorée.Le fichier ne se termine pas par la ligne \"Fin\".Bienvenue chez Barrette!Factures :";
+		String attendu = "ERREURS :\"Jean\" : Le fichier ne respecte pas le format demandï¿½ : Doit commencer par la section 'Clients'.La ligne a ï¿½tï¿½ ignorï¿½e.\"Frites 2.50\" : Le fichier ne respecte pas le format demandï¿½ : Doit commencer par la section 'Clients'.La ligne a ï¿½tï¿½ ignorï¿½e.\"Jean Frites 3\" : Le fichier ne respecte pas le format demandï¿½ : Doit commencer par la section 'Clients'.La ligne a ï¿½tï¿½ ignorï¿½e.Le fichier ne se termine pas par la ligne \"Fin\".Bienvenue chez Barrette!Factures :";
 		
-		//Exécuter la méthode
+		//Exï¿½cuter la mï¿½thode
 		String contenu = LectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
 		attendu = attendu.replaceAll("\n", "");
 		
-		//Lire le résultat
+		//Lire le rï¿½sultat
+		assertEquals(attendu, contenu);
+	}
+	
+	@Test
+	public void testFichierContinueApresFin() throws IOException {
+		
+		//ï¿½crire un fichier d'entrï¿½e
+		BufferedWriter bw = new BufferedWriter(new FileWriter("inputTest.txt"));
+		bw.write("Clients :"
+				+ "\nJean"
+				+ "\nPlats :"
+				+ "\nFrites 2.50"
+				+ "\nCommandes :"
+				+ "\nJean Frites 3"
+				+ "\nFin"
+				+ "\nJean Frites 4");
+		bw.close();
+		
+		String attendu = "ERREURS :\"Jean Frites 4\" : Le fichier ne respecte pas le format demandï¿½ : Aucune ligne ne doit suivre la ligne 'Fin'.La ligne a ï¿½tï¿½ ignorï¿½e.Bienvenue chez Barrette!Factures :Jean 8.62$";
+		
+		//Exï¿½cuter la mï¿½thode
+		String contenu = LectureFichier.executer("inputTest.txt");
+		
+		//Ne pas s'occuper des retours chariot
+		contenu = contenu.replaceAll("\n", "");
+		attendu = attendu.replaceAll("\n", "");
+		
+		//Lire le rï¿½sultat
 		assertEquals(attendu, contenu);
 	}
 
