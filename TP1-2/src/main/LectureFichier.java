@@ -212,8 +212,8 @@ public class LectureFichier {
 		
 		boolean test=false;
 		
-		if(!nomFichier.contains("*")||!nomFichier.contains("\\")||!nomFichier.contains("/")||!nomFichier.contains(":")
-				||!nomFichier.contains("*")||!nomFichier.contains("?")||!nomFichier.contains("\"")||!nomFichier.contains("<")||!nomFichier.contains(">")){
+		if(!nomFichier.contains("*")&&!nomFichier.contains("\\")&&!nomFichier.contains("/")&&!nomFichier.contains(":")
+				&&!nomFichier.contains("*")&&!nomFichier.contains("?")&&!nomFichier.contains("\"")&&!nomFichier.contains("<")&&!nomFichier.contains(">")){
 			
 			String extension=nomFichier.substring(nomFichier.length()-4,nomFichier.length());
 			
