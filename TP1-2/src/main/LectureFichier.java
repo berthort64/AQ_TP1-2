@@ -235,8 +235,7 @@ public class LectureFichier {
 		prix+=(tps+tvq);
 		
 		//Arrondi vers le bas et laisse seulement 2 decimal
-		DecimalFormat format=new DecimalFormat("##.##");
-		prix=Double.parseDouble(format.format(prix));
+		prix=Math.floor(prix*100)/100;
 		
 		
 		return prix;
