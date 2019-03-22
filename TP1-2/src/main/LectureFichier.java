@@ -41,16 +41,27 @@ public class LectureFichier {
 			
 		}
 		
+		System.out.println("\nFin du programme.");
 		
 	}
 	
-	public static void executer(String fichierL) throws IOException {
+	public static String executer(String fichierL) throws IOException {
+		
+		//Tout réinitialiser
+		clients 		= new ArrayList<Client>();
+		commandes 		= new ArrayList<Commande>();
+		plats 			= new ArrayList<Plat>();
+		
+		etat 			= 0;
+		MessageErreur	="Erreur dans la lecture du fichier\nFin du programme.";
+		erreurs 		= new ArrayList<String>();
 		
 		//Lecture dans le fichier des commandes
-		
 		BufferedReader br = new BufferedReader(new FileReader(fichierL));
 		
 		String ligne;
+		
+		print("ERREURS :\n");
 		
 		while ((ligne = br.readLine()) != null) {			
 			
@@ -108,43 +119,47 @@ public class LectureFichier {
 					if (contenu.length == 3) {
 						String nomClient = contenu[0];
 						String nomProduit = contenu[1];
-						int qte = Integer.parseInt(contenu[2]);
-						
-						Client clientCommande = null;
-						Plat platCommande = null;
-						
-						for (Client c : clients) {
-							if (c.getNom().equals(nomClient)) {
-								clientCommande = c;
-								break;
+						try {
+							int qte = Integer.parseInt(contenu[2]);
+							
+							Client clientCommande = null;
+							Plat platCommande = null;
+							
+							for (Client c : clients) {
+								if (c.getNom().equals(nomClient)) {
+									clientCommande = c;
+									break;
+								}
 							}
-						}
-						
-						if (clientCommande == null) {
 							
-							print('"' + ligne + "\" : Le client \"" + nomClient + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
-							break;
-							
-						}
-						
-						for (Plat p : plats) {
-							if (p.getProduit().equals(nomProduit)) {
-								platCommande = p;
+							if (clientCommande == null) {
+								
+								print('"' + ligne + "\" : Le client \"" + nomClient + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
 								break;
+								
 							}
-						}
-						
-						if (platCommande == null) {
 							
-							print('"' + ligne + "\" : Le plat \"" + nomProduit + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
-							break;
+							for (Plat p : plats) {
+								if (p.getProduit().equals(nomProduit)) {
+									platCommande = p;
+									break;
+								}
+							}
 							
+							if (platCommande == null) {
+								
+								print('"' + ligne + "\" : Le plat \"" + nomProduit + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
+								break;
+								
+							}
+							
+							Commande commande = new Commande(clientCommande, platCommande, qte);
+							commandes.add(commande);
+							
+							clientCommande.ajouterCommande(qte * platCommande.getPrix());
+						} catch(Exception e) {
+							print('"' + ligne + "\" : La quantité n'est pas un entier valide.\nLa commande n'a pas été ajoutée.\n");
 						}
-						
-						Commande commande = new Commande(clientCommande, platCommande, qte);
-						commandes.add(commande);
-						
-						clientCommande.ajouterCommande(qte * platCommande.getPrix());
 					} else {
 						print('"' + ligne + "\" : La commande ne respecte pas le format demandé\nLa commande n'a pas été ajoutée.\n");
 					}
@@ -167,23 +182,7 @@ public class LectureFichier {
 			print("Le fichier ne se termine pas par la ligne \"Fin\".");
 		}
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
-	    Date date = new Date();
-		
-		//Ecriture dans le fichier des factures
-		BufferedWriter bw = new BufferedWriter(new FileWriter("Facture-du-"+dateFormat.format(date)+".txt"));
-		
-		//Impression des erreurs
-		if (erreurs.size() > 0) {
-			bw.write("\n\nERREURS :\n");
-			for (String erreur : erreurs) {
-				bw.write(erreur + "\n");
-			}
-		}
-		
-		System.out.println("\n\nBienvenue chez Barrette!\nFactures :\n");
-		bw.write("\n\nBienvenue chez Barrette!\n");
-		bw.write("Factures :\n");
+		print("\n\nBienvenue chez Barrette!\nFactures :\n");
 		
 		for (Client client : clients) {
 			
@@ -191,24 +190,34 @@ public class LectureFichier {
 			String nomClient = client.getNom();
 			
 			if(facture!=0){
-				System.out.print(nomClient + " " + facture + "$\n");
-				bw.write(nomClient + " " + facture + "$\n");
+				print(nomClient + " " + facture + "$\n");
 				
 			}
 			
 		}
 		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+	    Date date = new Date();
+		
+		//Ecriture dans le fichier des factures
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Facture-du-"+dateFormat.format(date)+".txt"));
+		
+		//Impression des erreurs
+		for (String erreur : erreurs) {
+			bw.write(erreur + "\n");
+		}
+		
 		bw.close();
 		
-		System.out.println("\nFin du programme.");
+		return String.join("\n", erreurs);
 	}
 	
-	private static void print(String text) {
+	public static void print(String text) {
 		System.out.println(text);
 		erreurs.add(text);
 	}
 	
-	private static boolean ValiderFichier(String nomFichier){
+	public static boolean ValiderFichier(String nomFichier){
 		
 		boolean test=false;
 		
@@ -228,15 +237,14 @@ public class LectureFichier {
 		return test;
 	}
 	
-	private static double CalculTaxe(double prix){
+	public static double CalculTaxe(double prix){
 		
 		double tps=prix*(0.05);
 		double tvq=prix*(0.1);
 		prix+=(tps+tvq);
 		
 		//Arrondi vers le bas et laisse seulement 2 decimal
-		DecimalFormat format=new DecimalFormat("##.##");
-		prix=Double.parseDouble(format.format(prix));
+		prix = Math.floor(prix*100)/100;
 		
 		
 		return prix;
