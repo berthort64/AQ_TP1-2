@@ -1,0 +1,7 @@
+Clients :
+Jean
+Plats :
+Frites 2.50
+Commandes :
+Jean Frites 2.5
+Fin

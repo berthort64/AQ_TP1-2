@@ -1,0 +1,10 @@
+ERREURS :
+
+"Jean Frites 2.5" : La quantit� n'est pas un entier valide.
+La commande n'a pas �t� ajout�e.
+
+
+
+Bienvenue chez Barrette!
+Factures :
+
