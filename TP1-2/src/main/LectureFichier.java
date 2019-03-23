@@ -9,15 +9,18 @@ import java.util.Scanner;
 
 public class LectureFichier {
 
-	private static ArrayList<Client> clients 		= new ArrayList<Client>();
-	private static ArrayList<Commande> commandes 	= new ArrayList<Commande>();
-	private static ArrayList<Plat> plats 			= new ArrayList<Plat>();
+	private  ArrayList<Client> clients 		= new ArrayList<Client>();
+	private  ArrayList<Commande> commandes 	= new ArrayList<Commande>();
+	private  ArrayList<Plat> plats 			= new ArrayList<Plat>();
 	
-	private static int etat = 0;
-	private static String MessageErreur="Erreur dans la lecture du fichier\nFin du programme.";
-	private static ArrayList<String> erreurs = new ArrayList<String>();
+	private  int etat = 0;
+	private  static String MessageErreur="Erreur dans la lecture du fichier\nFin du programme.";
+	private  ArrayList<String> erreurs = new ArrayList<String>();
+	
 	
 	public static void main (String[] args) throws IOException {
+		
+		LectureFichier lectureFichier=new LectureFichier();
 		
 		//Nom des fichiers
 		Scanner reader = new Scanner(System.in);
@@ -29,11 +32,11 @@ public class LectureFichier {
 		
 		reader.close();
 		
-		boolean Validation=ValiderFichier(fichierL);
+		boolean Validation=lectureFichier.ValiderFichier(fichierL);
 		
 		if(Validation){
 			
-			executer(fichierL);
+			lectureFichier.executer(fichierL);
 			
 		}else{
 			
@@ -45,7 +48,7 @@ public class LectureFichier {
 		
 	}
 	
-	public static String executer(String fichierL) throws IOException {
+	public String executer(String fichierL) throws IOException {
 		
 		//Tout r�initialiser
 		clients 		= new ArrayList<Client>();
@@ -212,12 +215,12 @@ public class LectureFichier {
 		return String.join("\n", erreurs);
 	}
 	
-	public static void print(String text) {
+	public void print(String text) {
 		System.out.println(text);
 		erreurs.add(text);
 	}
 	
-	public static boolean ValiderFichier(String nomFichier){
+	public boolean ValiderFichier(String nomFichier){
 		
 		boolean test=false;
 		
@@ -237,7 +240,7 @@ public class LectureFichier {
 		return test;
 	}
 	
-	public static double CalculTaxe(double prix){
+	public double CalculTaxe(double prix){
 		
 		double tps=prix*(0.05);
 		double tvq=prix*(0.1);

@@ -2,64 +2,81 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import main.LectureFichier;
 
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class LectureFichierTest {
 
+	private LectureFichier lectureFichier;
+	
+	@Before
+	public void AvantChaqueTest() {
+
+		lectureFichier=new LectureFichier();
+
+	}
+
+	@After
+	public void ApresChaqueTest() {
+
+		lectureFichier = null;
+
+	}
+	
+	
 	//Test des taxes
 	@Test
 	public void testTaxes() {
-		assertEquals(11.5, LectureFichier.CalculTaxe(10), 0);
+		assertEquals(11.5, lectureFichier.CalculTaxe(10), 0);
 	}
 	
 	@Test
 	public void testTaxesZero() {
-		assertEquals(0, LectureFichier.CalculTaxe(0), 0);
+		assertEquals(0, lectureFichier.CalculTaxe(0), 0);
 	}
 	
 	@Test
 	public void testTaxesNegatif() {
-		assertEquals(-11.5, LectureFichier.CalculTaxe(-10), 0);
+		assertEquals(-11.5, lectureFichier.CalculTaxe(-10), 0);
 	}
 	
 
 	//Test des noms de fichier
 	@Test
 	public void testNomFichier() {
-		assertTrue(LectureFichier.ValiderFichier("document.txt"));
+		assertTrue(lectureFichier.ValiderFichier("document.txt"));
 	}
 	
 	@Test
 	public void testNomFichierDT() {
-		assertFalse(LectureFichier.ValiderFichier("dossier/nom.txt"));
+		assertFalse(lectureFichier.ValiderFichier("dossier/nom.txt"));
 	}
 	
 	@Test
 	public void testNomFichierSymbole() {
-		assertFalse(LectureFichier.ValiderFichier("mauvais?nom.txt"));
+		assertFalse(lectureFichier.ValiderFichier("mauvais?nom.txt"));
 	}
 	
 	@Test
 	public void testNomFichierNomCorrect() {
-		assertTrue(LectureFichier.ValiderFichier("nom correct, bien qu'am�liorable.txt"));
+		assertTrue(lectureFichier.ValiderFichier("nom correct, bien qu'am�liorable.txt"));
 	}
 	
 	@Test
 	public void testNomFichierFormat() {
-		assertFalse(LectureFichier.ValiderFichier("mauvaisFormat"));
+		assertFalse(lectureFichier.ValiderFichier("mauvaisFormat"));
 	}
 	
 	@Test
 	public void testNomFichierExtension() {
-		assertFalse(LectureFichier.ValiderFichier("mauvaiseExtension.md"));
+		assertFalse(lectureFichier.ValiderFichier("mauvaiseExtension.md"));
 	}
 	
 	//Test de la m�thode principale
@@ -80,7 +97,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\n\n\n\nBienvenue chez Barrette!\nFactures :\n\nJean 8.62$\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -107,7 +124,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\n\nLe fichier ne se termine pas par la ligne \"Fin\".\n\n\nBienvenue chez Barrette!\nFactures :\n\nJean 8.62$\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -134,7 +151,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\n\n\"Jean Frites 3\" : Le client \"Jean\" n'existe pas\nLa commande n'a pas �t� ajout�e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -161,7 +178,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Jean Frites 3\" : Le plat \"Frites\" n'existe pas\nLa commande n'a pas �t� ajout�e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -188,7 +205,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Frites cecinestpasunprix\" : Le prix ne respecte pas le format demand�Le plat n'a pas �t� ajout�.\"Jean Frites 3\" : Le plat \"Frites\" n'existe pas\nLa commande n'a pas �t� ajout�e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -215,7 +232,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Jean Frites cecinestpasunchiffre\" : La quantit� n'est pas un entier valide.La commande n'a pas �t� ajout�e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -242,7 +259,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Jean Frites 2.5\" : La quantit� n'est pas un entier valide.La commande n'a pas �t� ajout�e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -269,7 +286,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\n\n\n\nBienvenue chez Barrette!\nFactures :\n\nJean 8.62$\n";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -296,7 +313,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Jean Frites 3\" : Le client \"Jean\" n'existe pasLa commande n'a pas �t� ajout�e.Bienvenue chez Barrette!Factures :";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -323,7 +340,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Jean �douard\" : Le client ne respecte pas le format demand�Le client n'a pas �t� ajout�.\"Frites sal�es, 2.50$\" : Le plat ne respecte pas le format demand�Le plat n'a pas �t� ajout�.\"Jean a command� trois frites sal�es.\" : La commande ne respecte pas le format demand�La commande n'a pas �t� ajout�e.Bienvenue chez Barrette!Factures :";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -346,7 +363,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Jean\" : Le fichier ne respecte pas le format demand� : Doit commencer par la section 'Clients'.La ligne a �t� ignor�e.\"Frites 2.50\" : Le fichier ne respecte pas le format demand� : Doit commencer par la section 'Clients'.La ligne a �t� ignor�e.\"Jean Frites 3\" : Le fichier ne respecte pas le format demand� : Doit commencer par la section 'Clients'.La ligne a �t� ignor�e.Le fichier ne se termine pas par la ligne \"Fin\".Bienvenue chez Barrette!Factures :";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
@@ -374,7 +391,7 @@ public class LectureFichierTest {
 		String attendu = "ERREURS :\"Jean Frites 4\" : Le fichier ne respecte pas le format demand� : Aucune ligne ne doit suivre la ligne 'Fin'.La ligne a �t� ignor�e.Bienvenue chez Barrette!Factures :Jean 8.62$";
 		
 		//Ex�cuter la m�thode
-		String contenu = LectureFichier.executer("inputTest.txt");
+		String contenu = lectureFichier.executer("inputTest.txt");
 		
 		//Ne pas s'occuper des retours chariot
 		contenu = contenu.replaceAll("\n", "");
