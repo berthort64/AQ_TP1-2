@@ -33,10 +33,10 @@ public class PlatTest {
 		
 	}
 	
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void TestGetPrixNull() {
 		
-		plat=null;
+		plat=new Plat("",0);
 		
 		assertEquals(0,plat.getPrix(),0.01);
 		
@@ -62,9 +62,9 @@ public class PlatTest {
 	@Test(expected=NullPointerException.class)
 	public void TestGetProduitNull() {
 		
-		plat=null;
+		plat=new Plat(null,0);
 		
-		assertEquals("Hot dog",plat.getProduit());
+		assertNull(plat.getProduit());
 		
 	}
 	

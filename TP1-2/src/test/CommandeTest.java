@@ -34,7 +34,7 @@ public class CommandeTest {
 
 	}
 	
-	@Test
+	@Test 
 	public void TestCommandeClient(){
 		
 		Client client=commande.getClient();
@@ -64,19 +64,21 @@ public class CommandeTest {
 		
 	}
 
-	@Test
+	@Test(expected=NullPointerException.class)
 	public void TestCommandeClientVide() {
 
 		commande = new Commande(null, plat, 2);
-		assertEquals(null, commande.getClient());
+		
+		assertNull(commande.getClient());
 
 	}
 
-	@Test
+	@Test(expected=NullPointerException.class)
 	public void TestCommandeProduitVide() {
 
 		commande = new Commande(client, null, 2);
-		assertEquals(null, commande.getProduit());
+		
+		assertNull(commande.getProduit());
 	}
 
 	@Test

@@ -237,7 +237,7 @@ public class LectureFichierTest {
 				+ "\nCommandes :"
 				+ "\nJean Frites 2.5"
 				+ "\nFin");
-		bw.close();
+		bw.close(); 
 		
 		String attendu = "ERREURS :\"Jean Frites 2.5\" : La quantit� n'est pas un entier valide.La commande n'a pas �t� ajout�e.\n\nBienvenue chez Barrette!\nFactures :\n\n";
 		

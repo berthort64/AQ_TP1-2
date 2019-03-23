@@ -22,7 +22,7 @@ public class ClientTest {
 	public void ApresChaqueTest() {
 
 		client = null;
-
+ 
 	}
 
 	@Test
@@ -33,11 +33,11 @@ public class ClientTest {
 
 	}
 
-	
+	@Test(expected=NullPointerException.class)
 	public void testGetNomVide() {
 		client.setNom(null);
 
-		assertEquals(null, client.getNom());
+		assertNull(client.getNom());
 	}
 
 	@Test
