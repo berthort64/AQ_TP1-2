@@ -35,13 +35,21 @@ public class CommandeTest {
 	}
 	
 	@Test 
-	public void TestCommandeClient(){
+	public void TestCommandeClientNom(){
+		
+		Client client=commande.getClient();
+		
+		assertEquals("Patrick",client.getNom());
+		
+	}
+	
+	@Test 
+	public void TestCommandeClientFacture(){
 		
 		Client client=commande.getClient();
 		client.ajouterCommande(50);
-		String humain=client.getNom()+Double.toString((client.getFacture()));
 		
-		assertEquals("Patrick50.0",humain);
+		assertEquals(50.0,client.getFacture(), 0);
 		
 	}
 	

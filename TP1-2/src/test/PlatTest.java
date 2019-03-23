@@ -59,7 +59,7 @@ public class PlatTest {
 		
 	}
 	
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void TestGetProduitNull() {
 		
 		plat=new Plat(null,0);
