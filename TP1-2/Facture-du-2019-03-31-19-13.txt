@@ -1,0 +1,10 @@
+
+
+ERREURS :
+"Factures :" : Le client ne respecte pas le format demand�
+Le client n'a pas �t� ajout�.
+
+
+
+Bienvenue chez Barrette!
+Factures :

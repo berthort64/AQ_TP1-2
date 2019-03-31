@@ -82,7 +82,7 @@ public class LectureFichier {
 						Client client = new Client(contenu[0]);
 						clients.add(client);
 					} else {
-						print('"' + ligne + "\" : Le client ne respecte pas le format demandé\nLe client n'a pas été ajouté.\n");
+						print('"' + ligne + "\" : Le client ne respecte pas le format demandï¿½\nLe client n'a pas ï¿½tï¿½ ajoutï¿½.\n");
 					}
 					break;
 					
@@ -95,11 +95,11 @@ public class LectureFichier {
 							plats.add(plat);
 						} catch(Exception e) {
 							
-							print('"' + ligne + "\" : Le prix ne respecte pas le format demandé\nLe plat n'a pas été ajouté.\n");
+							print('"' + ligne + "\" : Le prix ne respecte pas le format demandï¿½\nLe plat n'a pas ï¿½tï¿½ ajoutï¿½.\n");
 						}
 						
 					} else {
-						print('"' + ligne + "\" : Le plat ne respecte pas le format demandé\nLe plat n'a pas été ajouté.\n");
+						print('"' + ligne + "\" : Le plat ne respecte pas le format demandï¿½\nLe plat n'a pas ï¿½tï¿½ ajoutï¿½.\n");
 					}
 					break;
 					
@@ -122,7 +122,7 @@ public class LectureFichier {
 						
 						if (clientCommande == null) {
 							
-							print('"' + ligne + "\" : Le client \"" + nomClient + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
+							print('"' + ligne + "\" : Le client \"" + nomClient + "\" n'existe pas\nLa commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n");
 							break;
 							
 						}
@@ -136,7 +136,7 @@ public class LectureFichier {
 						
 						if (platCommande == null) {
 							
-							print('"' + ligne + "\" : Le plat \"" + nomProduit + "\" n'existe pas\nLa commande n'a pas été ajoutée.\n");
+							print('"' + ligne + "\" : Le plat \"" + nomProduit + "\" n'existe pas\nLa commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n");
 							break;
 							
 						}
@@ -146,16 +146,16 @@ public class LectureFichier {
 						
 						clientCommande.ajouterCommande(qte * platCommande.getPrix());
 					} else {
-						print('"' + ligne + "\" : La commande ne respecte pas le format demandé\nLa commande n'a pas été ajoutée.\n");
+						print('"' + ligne + "\" : La commande ne respecte pas le format demandï¿½\nLa commande n'a pas ï¿½tï¿½ ajoutï¿½e.\n");
 					}
 					break;
 					
 				// Cas d'erreur
 				case 0:
-					print('"' + ligne + "\" : Le fichier ne respecte pas le format demandé : Doit commencer par la section 'Clients'.\nLa ligne a été ignorée.\n");
+					print('"' + ligne + "\" : Le fichier ne respecte pas le format demandï¿½ : Doit commencer par la section 'Clients'.\nLa ligne a ï¿½tï¿½ ignorï¿½e.\n");
 					break;
 				case -1:
-					print('"' + ligne + "\" : Le fichier ne respecte pas le format demandé : Aucune ligne ne doit suivre la ligne 'Fin'.\nLa ligne a été ignorée.\n");
+					print('"' + ligne + "\" : Le fichier ne respecte pas le format demandï¿½ : Aucune ligne ne doit suivre la ligne 'Fin'.\nLa ligne a ï¿½tï¿½ ignorï¿½e.\n");
 					break;
 				}
 			}
@@ -203,12 +203,12 @@ public class LectureFichier {
 		System.out.println("\nFin du programme.");
 	}
 	
-	private static void print(String text) {
+	public static void print(String text) {
 		System.out.println(text);
 		erreurs.add(text);
 	}
 	
-	private static boolean ValiderFichier(String nomFichier){
+	public static boolean ValiderFichier(String nomFichier){
 		
 		boolean test=false;
 		
@@ -228,7 +228,7 @@ public class LectureFichier {
 		return test;
 	}
 	
-	private static double CalculTaxe(double prix){
+	public static double CalculTaxe(double prix){
 		
 		double tps=prix*(0.05);
 		double tvq=prix*(0.1);
