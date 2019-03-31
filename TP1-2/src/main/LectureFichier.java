@@ -13,7 +13,7 @@ public class LectureFichier {
 	private  ArrayList<Plat> plats 			= new ArrayList<Plat>();
 	
 	private  int etat = 0;
-	private  static String MessageErreur="Erreur dans la lecture du fichier\nFin du programme.";
+	private  final static String MessageErreur="Erreur dans la lecture du fichier.";
 	private  ArrayList<String> erreurs = new ArrayList<String>();
 	
 	
@@ -55,7 +55,6 @@ public class LectureFichier {
 		plats 			= new ArrayList<Plat>();
 		
 		etat 			= 0;
-		MessageErreur	="Erreur dans la lecture du fichier\nFin du programme.";
 		erreurs 		= new ArrayList<String>();
 		
 		//Lecture dans le fichier des commandes
@@ -222,7 +221,7 @@ public class LectureFichier {
 	public boolean ValiderFichier(String nomFichier){
 		
 		boolean test=false;
-		
+		try {
 		if(!nomFichier.contains("*")&&!nomFichier.contains("\\")&&!nomFichier.contains("/")&&!nomFichier.contains(":")
 				&&!nomFichier.contains("*")&&!nomFichier.contains("?")&&!nomFichier.contains("\"")&&!nomFichier.contains("<")&&!nomFichier.contains(">")){
 			
@@ -233,6 +232,11 @@ public class LectureFichier {
 				test=true;
 				
 			}
+			
+		}
+		}catch(Exception e) {
+			
+			
 			
 		}
 		
