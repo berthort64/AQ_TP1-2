@@ -72,7 +72,7 @@ public class CommandeTest {
 		
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void TestCommandeClientVide() {
 
 		commande = new Commande(null, plat, 2);
@@ -81,7 +81,7 @@ public class CommandeTest {
 
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void TestCommandeProduitVide() {
 
 		commande = new Commande(client, null, 2);
