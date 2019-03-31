@@ -33,7 +33,7 @@ public class ClientTest {
 
 	}
 
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void testGetNomVide() {
 		client.setNom(null);
 
